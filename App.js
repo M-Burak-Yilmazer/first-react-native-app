@@ -33,40 +33,42 @@ export default function App() {
     setCourseGoals((currentCourseGoals) => {
       return currentCourseGoals.filter((goal) => goal.key != id);
     });
-    
   };
 
   return (
-    <View style={styles.container}>
-      <Button
-        title="Add New Goal"
-        color="#5e0acc"
-        onPress={startAddGoalHandler}
-      />
-      <GoalInput
-        visible={modalVisible}
-        addGoalHandler={addGoalHandler}
-        closeModal={endGoalHandler}
-      />
-
-      <View style={styles.goalsContainer}>
-        <FlatList
-          data={courseGoals}
-          renderItem={(itemData) => {
-            return (
-              <GoalItem
-                text={itemData.item.text}
-                id={itemData.item.key}
-                delete={deleteGoalHandler}
-              />
-            );
-          }}
-          keyExtractor={(item, index) => {
-            return item.key;
-          }}
+    <>
+      <StatusBar style="light" />
+      <View style={styles.container}>
+        <Button
+          title="Add New Goal"
+          color="#a065ec"
+          onPress={startAddGoalHandler}
         />
+        <GoalInput
+          visible={modalVisible}
+          addGoalHandler={addGoalHandler}
+          closeModal={endGoalHandler}
+        />
+
+        <View style={styles.goalsContainer}>
+          <FlatList
+            data={courseGoals}
+            renderItem={(itemData) => {
+              return (
+                <GoalItem
+                  text={itemData.item.text}
+                  id={itemData.item.key}
+                  delete={deleteGoalHandler}
+                />
+              );
+            }}
+            keyExtractor={(item, index) => {
+              return item.key;
+            }}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
